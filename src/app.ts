@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import routes from "./api/index";
 import loaders from "./loaders"; // 👈 add loaders
+import helmet from "helmet";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ async function startServer() {
   // Middlewares
   app.use(cors());
   app.use(express.json());
+  app.use(helmet());
 
   // Initialize DI (logger, DB, models)
   await loaders();
