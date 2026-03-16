@@ -28,4 +28,19 @@ export default class AuthService {
     }
     return { user: doc };
   }
+
+  async getUsers(req: any): Promise<{ user: any }> {
+    let doc = {};
+    try {
+      console.log("test");
+      doc = await this.authModel.find({});
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        throw err.issues;
+      }
+      this.logger.error(err);
+      this.throwError(Helper.StatusCode.InternalError, "Something went wrong");
+    }
+    return { user: doc };
+  }
 }
